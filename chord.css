@@ -1,0 +1,32 @@
+body {
+    background-color: rgb(200, 160, 240);
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+p {
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+hr {
+    color: black;
+    background-color: black;
+}
+
+#audio {
+    text-align: center;
+    padding: 5px 10px 10px 10px;
+}
+
+#notes {
+    text-align: center;
+}
+
+#dropdowns {
+    text-align: center;
+    padding: 5px 5px 5px 10px;
+}
