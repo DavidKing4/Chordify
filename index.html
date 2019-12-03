@@ -9,85 +9,35 @@
     <title> Chordinate </title>
 </head>
 <body>
-    <h1>Chordinate</h1>
-    <p>Drag the chords to finish the tune!</p>
-    <hr>
-    <div id="notes"></div>
-    <div id="dropdowns">
-        <select class="noteDropdowns" id="select0">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>
-        <select class="noteDropdowns" id="select1">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>
-        <select class="noteDropdowns" id="select2">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>
-        <select class="noteDropdowns" id="select3">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>
-        <select class="noteDropdowns" id="select4">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>
-        <select class="noteDropdowns" id="select5">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>
-        <select class="noteDropdowns" id="select6">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>
-        <select class="noteDropdowns" id="select7">
-            <option selected>Choose</option>
-            <option>A2</option>
-            <option>B2</option>
-            <option>A3</option>
-            <option>D3</option>
-            <option>F3</option>
-            <option>G3</option>
-        </select>                                                                                                                                                                                
+    <div id="container">
+        <h1>Chordinate</h1>
+        <p>Drag the chords to finish the tune!</p>
+        <hr>
+        <div id="notes"></div>
+        <div id="drops">
+            <div id="b1" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div id="b3" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="barline"></div>
+            <div id="b5" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div id="b7" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="barline"></div>
+            <div id="b9" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div id="b11" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="barline"></div>
+            <div id="b13" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div id="b15" class="minum" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+        <hr>
+        <div id="drags">
+                <div draggable="true" class="chord" ondragstart="drag(event)">A2</div>
+                <div draggable="true" class="chord" ondragstart="drag(event)">B2</div>
+                <div draggable="true" class="chord" ondragstart="drag(event)">A3</div>
+                <div draggable="true" class="chord" ondragstart="drag(event)">D3</div>
+                <div draggable="true" class="chord" ondragstart="drag(event)">F3</div>
+                <div draggable="true" class="chord" ondragstart="drag(event)">G3</div>
+        </div>
+        <div id="audio"></div>
     </div>
-    <div id="audio"></div>
 
 </body>
 </html>

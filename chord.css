@@ -1,15 +1,14 @@
 body {
     background-color: rgb(200, 160, 240);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 h1 {
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 p {
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 hr {
@@ -22,6 +21,11 @@ hr {
     padding: 5px 10px 10px 10px;
 }
 
+#container {
+    margin: auto;
+    width: 850px;
+}
+
 #notes {
     text-align: center;
 }
@@ -29,4 +33,49 @@ hr {
 #dropdowns {
     text-align: center;
     padding: 5px 5px 5px 10px;
+}
+
+#drops {
+    height: 60px;
+    margin-left: 170px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.minum {
+    width: 56px;
+    height: 100%;
+    margin: 0 3.5px;
+    background-color: gray;
+    display: flex;
+    border-radius: 5px;
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+}
+
+.barline {
+    width: 3px;
+    height: 100%;
+    margin: 0 10px;
+    background-color: black;
+    display: inline-block;
+}
+
+#drags {
+    height: 20px;
+    padding: 20px 0;
+    margin-left: 140px;
+    display: flex;
+    justify-content: center;
+}
+.chord {
+    width: 40px;
+    height: 100%;
+    margin: 0 5px;
+    color: black;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 3px;
+    text-align: center;
 }
