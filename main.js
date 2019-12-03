@@ -1,8 +1,8 @@
-var data, source;
-var i, beats = [];
+"use strict";
+let data, source;
+let i, beats = [];
 
 function drag(ev) {
-    console.log(ev.target.className)
     source = ev.target;
     data = ev.target.innerHTML;
     ev.dataTransfer.setData("text", ev.target.text);
@@ -13,7 +13,7 @@ function allowDrop(ev) {
 }
 
 function drop(ev) {
-    
+
     ev.preventDefault();
 
     if (source.className == "minum") {
@@ -23,9 +23,8 @@ function drop(ev) {
     if (ev.target.className == "minum" && data != undefined){
         ev.target.innerHTML = data;
     }
-    
-    var bar = '';
-    console.log(beats)
+
+    let bar = '';
 
     for (i = 1; i < beats.length; i++) {
 
@@ -39,25 +38,22 @@ function drop(ev) {
         if (beats[i] === null) {
             continue;
         }
-        var note = beats[i].innerHTML;
-        console.log(note)
+        const note = beats[i].innerHTML;
         if (note === "" || note === "" || chordDict[note] === undefined) {
             bar += " z4 ";
         } else {
             bar += chordDict[note];
-            console.log(bar)   
         }
     }
     if (bar == " z4  z4 ") {
         bar = "z8";
     }
     chords[3] = bar;
-    console.log(chords)
     cannon = baseCannon + chords.join(" | ") + " |]";
     makeMidi()
 }
 
-var baseCannon = "X:1\n\
+let baseCannon = "X:1\n\
 T:Pachelbel's Canon\n\
 C:Johann Pachelbel (1653-1706)\n\
 M:4/4\n\
@@ -67,23 +63,23 @@ K:D\n\
 V: T1 clef=treble name=\"Melody\"\n\
 V: T2 clef=bass name=\"Bass\"\n\
 [V: T1]af/g/ af/g/ a/A/B/c/ d/e/f/g/ | fd/e/ fF/G/ A/B/A/G/ A/F/G/A/ |  GB/A/ GF/E/ F/E/D/E/  F/G/A/B/ | GB/A/ Bc/d/ A/B/c/d/ e/f/g/a/ |]\n\
-[V: T2]  ";     
-var chords = ["z8","z8","z8","z8"];
-var cannon = baseCannon + chords.join(" | ") + " |]";
+[V: T2]  ";
+let chords = ["z8","z8","z8","z8"];
+let cannon = baseCannon + chords.join(" | ") + " |]";
 
-var chordDict = {};
-chordDict["A2"] = "A,,4";
-chordDict["B2"] = "B,,4";
-chordDict["A3"] = "A,4";
-chordDict["D3"] = "D,4";
-chordDict["F3"] = "F,4";
-chordDict["G3"] = "G,4";
-chordDict["reset"] = "z4";
+const chordDict = {
+    "A2": "A,,4",
+    "B2": "B,,4",
+    "A3": "A,4",
+    "D3": "D,4",
+    "F3": "F,4",
+    "G3": "G,4"
+};
 
-function makeMidi(){   
+function makeMidi() {
     if (ABCJS.synth.supportsAudio()) {
-        var visualObj = ABCJS.renderAbc('notes', cannon)[0];
-        var synthControl = new ABCJS.synth.SynthController();
+        const visualObj = ABCJS.renderAbc('notes', cannon)[0];
+        const synthControl = new ABCJS.synth.SynthController();
         synthControl.load("#audio", null, {displayRestart: true, displayPlay: true, displayProgress: true});
         synthControl.setTune(visualObj, false);
     } else {
