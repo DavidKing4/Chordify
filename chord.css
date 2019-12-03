@@ -68,6 +68,11 @@ hr {
     margin-left: 140px;
     display: flex;
     justify-content: center;
+    background-color: rgb(218, 184, 252);
+    border-radius: 5px;
+    border: 2px solid black;
+    margin-bottom: 15px;
+    margin-top: 10px;
 }
 .chord {
     width: 40px;

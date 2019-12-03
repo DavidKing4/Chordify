@@ -1,7 +1,9 @@
-var data;
+var data, source;
 var i, beats = [];
 
 function drag(ev) {
+    console.log(ev.target.className)
+    source = ev.target;
     data = ev.target.innerHTML;
     ev.dataTransfer.setData("text", ev.target.text);
 }
@@ -11,10 +13,17 @@ function allowDrop(ev) {
 }
 
 function drop(ev) {
-
-    ev.target.innerHTML = data;
+    
     ev.preventDefault();
-    var whichbar = 0;
+
+    if (source.className == "minum") {
+        source.innerHTML = "";
+    }
+
+    if (ev.target.className == "minum" && data != undefined){
+        ev.target.innerHTML = data;
+    }
+    
     var bar = '';
     console.log(beats)
 
@@ -32,7 +41,7 @@ function drop(ev) {
         }
         var note = beats[i].innerHTML;
         console.log(note)
-        if (note === "") {
+        if (note === "" || note === "" || chordDict[note] === undefined) {
             bar += " z4 ";
         } else {
             bar += chordDict[note];
