@@ -1,49 +1,51 @@
 "use strict";
 
 const chordDict = {
-    "C0": "C,,,,,",
+    "C0": "C,,,,",
     "D0": "D,,,,",
     "E0": "E,,,,",
     "F0": "F,,,,",
     "G0": "G,,,,",
     "A0": "A,,,,",
     "B0": "B,,,,",
-    "C1": "C,,,,",
+    "C1": "C,,,",
     "D1": "D,,,",
     "E1": "E,,,",
     "F1": "F,,,",
     "G1": "G,,,",
     "A1": "A,,,",
     "B1": "B,,,",
-    "C2": "C,,,",
+    "C2": "C,,",
     "D2": "D,,",
     "E2": "E,,",
     "F2": "F,,",
     "G2": "G,,",
     "A2": "A,,",
     "B2": "B,,",
-    "C3": "C,,",
+    "C3": "C,",
+    "D3♭": "_D,",
     "D3": "D,",
     "E3": "E,",
+    "E3♮": "=E,",
     "F3": "F,",
     "G3": "G,",
     "A3": "A,",
     "B3": "B,",
-    "C4": "C,",
+    "C4": "C",
     "D4": "D",
     "E4": "E",
     "F4": "F",
     "G4": "G",
     "A4": "A",
     "B4": "B",
-    "C5": "C",
+    "C5": "c",
     "D5": "d",
     "E5": "e",
     "F5": "f",
     "G5": "g",
     "A5": "a",
     "B5": "b",
-    "C6": "c",
+    "C6": "c'",
     "D6": "d'",
     "E6": "e'",
     "F6": "f'",
@@ -52,49 +54,51 @@ const chordDict = {
     "B6": "b'"
 };
 const reverseChordDict = {
-    "C,,,,,": "C0",
+    "C,,,,": "C0",
     "D,,,,": "D0",
     "E,,,,": "E0",
     "F,,,,": "F0",
     "G,,,,": "G0",
     "A,,,,": "A0",
     "B,,,,": "B0",
-    "C,,,,": "C1",
+    "C,,,": "C1",
     "D,,,": "D1",
     "E,,,": "E1",
     "F,,,": "F1",
     "G,,,": "G1",
     "A,,,": "A1",
     "B,,,": "B1",
-    "C,,,": "C2",
+    "C,,": "C2",
     "D,,": "D2",
     "E,,": "E2",
     "F,,": "F2",
     "G,,": "G2",
     "A,,": "A2",
     "B,,": "B2",
-    "C,,": "C3",
+    "C,": "C3",
+    "_D,": "D3♭",
     "D,": "D3",
     "E,": "E3",
+    "=E,": "E3♮",
     "F,": "F3",
     "G,": "G3",
     "A,": "A3",
     "B,": "B3",
-    "C,": "C4",
+    "C": "C4",
     "D": "D4",
     "E": "E4",
     "F": "F4",
     "G": "G4",
     "A": "A4",
     "B": "B4",
-    "C": "C5",
+    "c": "C5",
     "d": "D5",
     "e": "E5",
     "f": "F5",
     "g": "G5",
     "a": "A5",
     "b": "B5",
-    "c": "C6",
+    "c'": "C6",
     "d'": "D6",
     "e'": "E6",
     "f'": "F6",
@@ -118,6 +122,7 @@ let i, j, beats = [];
 let baseCannon = "";
 let chords = [];
 let cannon = "";
+const synthControl = new ABCJS.synth.SynthController();
 
 function drag(ev) {
     source = ev.target;
@@ -261,11 +266,11 @@ function makeDrops(bass, L) {
 function makeMidi() {
     if (ABCJS.synth.supportsAudio()) {
         const visualObj = ABCJS.renderAbc('notes', cannon)[0];
-        const synthControl = new ABCJS.synth.SynthController();
         synthControl.load("#audio", null, {displayRestart: true, displayPlay: true, displayProgress: true});
         synthControl.setTune(visualObj, false);
+        synthControl.restart();
     } else {
-        document.querySelector("#audio").innerHTML = "<div class='audio-error'>Audio is not supported in this browser.</div>";
+        document.querySelector("#audio").innerHTML = "<div class=\"audio-error\">Audio is not supported in this browser.</div>";
     }
 }
 
