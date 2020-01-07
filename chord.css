@@ -44,8 +44,32 @@ hr {
     -moz-user-select: none;
 }
 
+.crotchet {
+    width: 22.5px;
+    height: 100%;
+    margin: 0 3.5px;
+    background-color: gray;
+    display: flex;
+    border-radius: 5px;
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+}
+
 .minum {
     width: 56px;
+    height: 100%;
+    margin: 0 3.5px;
+    background-color: gray;
+    display: flex;
+    border-radius: 5px;
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+}
+
+.semibreve {
+    width: 123px;
     height: 100%;
     margin: 0 3.5px;
     background-color: gray;
@@ -68,7 +92,7 @@ hr {
     height: 30px;
     width: 650px;
     padding: 20px 0;
-    margin-left: 140px;
+    margin-left: 147px;
     display: flex;
     justify-content: center;
     background-color: rgb(218, 184, 252);

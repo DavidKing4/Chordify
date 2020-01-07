@@ -1,0 +1,5 @@
+{
+    "baseCannon": "X:1\nT:Pachelbel's Canon\nC:Johann Pachelbel (1653-1706)\nM:4/4\nL: 1/8\nQ:84\nK:D\nV: T1 clef=treble name=\"Melody\"\nV: T2 clef=bass name=\"Bass\"\n[V: T1]af/g/ af/g/ a/A/B/c/ d/e/f/g/ | fd/e/ fF/G/ A/B/A/G/ A/F/G/A/ |  GB/A/ GF/E/ F/E/D/E/  F/G/A/B/ | GB/A/ Bc/d/ A/B/c/d/ e/f/g/a/ |]\n[V: T2]  ",
+    "bass": ["D,4 A,,4", "B,,4 F,4", "G,4 D,4", "G,4 A,4"],
+    "L": 8
+}
