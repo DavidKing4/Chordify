@@ -115,11 +115,9 @@ const lenDict = {
 let data, source;
 let L = 0;
 let i, j, beats = [];
-let song = 'cannon';
-song = "106-jesu-leiden-pein-und-tod";
 let baseCannon = "";
 let chords = [];
-let cannon = baseCannon + chords.join(" | ") + " |]";
+let cannon = "";
 
 function drag(ev) {
     source = ev.target;
@@ -132,20 +130,16 @@ function allowDrop(ev) {
 }
 
 function drop(ev) {
-
+    chords = [];
     ev.preventDefault();
-
     if (["crotchet", "minum", "semibreve"].includes(source.className)) {
         source.innerHTML = "";
     }
-
     if (["crotchet", "minum", "semibreve"].includes(ev.target.className) && data != undefined){
         ev.target.innerHTML = data;
     }
-
     let bar = '';
     let beatCounter = 1;
-
     for (i = 0; i < beats.length; i++) {
         if (beatCounter != 1 && beatCounter % 4 == 1){
             const barNotes = bar.split(" ");
@@ -186,47 +180,60 @@ function drop(ev) {
         chords[Math.floor(beatCounter/4) - 1] = bar;
         bar = '';
     }
-    console.log(chords)
     cannon = baseCannon + chords.join(" | ") + " |]";
     makeMidi()
 }
 
-fetch('./' + song + '.json')
+function updateSong(song){  
+    fetch(song)
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            baseCannon = myJson.baseCannon;
+            L = myJson.L
+            chords = ["z" + myJson.L,"z" + myJson.L,"z" + myJson.L,"z" + myJson.L];
+            cannon = baseCannon + chords.join(" | ") + " |]";
+            makeDrops(myJson.bass, myJson.L);
+            makeMidi();
+        });
+}
+
+fetch("./songs.json")
     .then((response) => {
         return response.json();
     })
     .then((myJson) => {
-        baseCannon = myJson.baseCannon;
-        L = myJson.L
-        chords = ["z" + myJson.L,"z" + myJson.L,"z" + myJson.L,"z" + myJson.L];
-        cannon = baseCannon + chords.join(" | ") + " |]";
-        makeDrops(myJson.bass, myJson.L);
-        makeMidi();
+        let songHtml = "";
+        for (i = 0; i < myJson.songNames.length; i++){
+            songHtml +=" <div class=\"song\">" + myJson.songNames[i] + "</div>";
+        }
+        document.querySelector("#songs").innerHTML = songHtml;
+        songs = document.querySelectorAll(".song");
+        for (i = 0; i < myJson.songJson.length; i++) {
+            const song = "./" + myJson.songJson[i]
+            songs[i].addEventListener("click", function(){
+                updateSong(song);
+            });
+        }
     });
 
 function makeDrops(bass, L) {
     let drags = [];
     let drops = '';
     let barcounter = 0;
-    // console.log(L);
-    // console.log(bass);
+    beats = [];
     for (i = 0; i < bass.length; i++) {
         let bar = bass[i].split(' ');
-        console.log(bar);
         for (j = 0; j < bar.length; j++){
             const note = bar[j];
             const hold = note[note.length - 1];
             const noteType = holdDict[L/hold] == undefined ? "crotchet" : holdDict[L/hold];
-            // console.log(noteType)
             drops += "<div id=" + "b" + (barcounter + 1) + " class=\"" + noteType + "\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" draggable=\"true\" ondragstart=\"drag(event)\"></div>\n";
-            // console.log(barcounter);
-            // console.log(drops)
             barcounter += holdDict[L/hold] == undefined ? 1 : parseInt(hold);
             if ((barcounter % L) == 0 && barcounter != L*4) {
                 drops += "<div class=\"barline\"></div>\n";
             }
-            console.log(note)
-            console.log(note.substring(0, note.length - 1))
             if (!drags.includes(note.substring(0, note.length - 1))) {
                 drags = drags.concat([note.substring(0, note.length - 1)]);
             }
@@ -245,9 +252,7 @@ function makeDrops(bass, L) {
     }
     drags = drags.sort();
     var dragsHtml = "";
-    for (i = 0; i < drags.length; i++){
-        // console.log(drags[i])
-        // console.log(reverseChordDict[drags[i]])
+    for (i = 0; i < drags.length; i++){ 
         dragsHtml += "<div draggable=\"true\" class=\"chord\" ondragstart=\"drag(event)\">" + reverseChordDict[drags[i]] + "</div>";
     }
     document.querySelector("#drags").innerHTML = dragsHtml;
@@ -263,3 +268,5 @@ function makeMidi() {
         document.querySelector("#audio").innerHTML = "<div class='audio-error'>Audio is not supported in this browser.</div>";
     }
 }
+
+updateSong("./cannon.json")
