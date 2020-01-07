@@ -214,7 +214,7 @@ fetch("./songs.json")
             songHtml +=" <div class=\"song\">" + myJson.songNames[i] + "</div>";
         }
         document.querySelector("#songs").innerHTML = songHtml;
-        songs = document.querySelectorAll(".song");
+        const songs = document.querySelectorAll(".song");
         for (i = 0; i < myJson.songJson.length; i++) {
             const song = "./" + myJson.songJson[i]
             songs[i].addEventListener("click", function(){
