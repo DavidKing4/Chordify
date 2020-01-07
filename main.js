@@ -274,4 +274,4 @@ function makeMidi() {
     }
 }
 
-updateSong("./cannon.json")
+updateSong("./cannon.json");
