@@ -131,7 +131,8 @@ hr {
 .song {
     height: 30px;
     margin: 0 10px;
-    color: blue;;
+    color: blue;
+    cursor: pointer;
     border-radius: 3px;
     text-align: center;
     align-items: center;
